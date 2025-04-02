@@ -1,4 +1,4 @@
-# PR 描述產生器 (pr_desc_generator_v2.sh)
+# PR 描述產生器 (pr_desc_generator.sh)
 
 這是一款高效的 Pull Request 描述自動生成工具，使用 Git 差異分析和先進的 AI 技術，幫助開發者快速產生結構清晰、內容完整的 PR 描述。
 
@@ -24,7 +24,7 @@
 
 基本用法：
 ```bash
-./pr_desc_generator_v2.sh 目標分支 [來源分支] [選項]
+./pr_desc_generator.sh 目標分支 [來源分支] [選項]
 ```
 
 ### 必要參數
@@ -40,8 +40,6 @@
 - `--gemini`, `-g`：使用 Gemini AI 優化 PR 描述
 - `--en`：使用英文生成 PR 描述
 - `--zh-tw`：使用繁體中文（臺灣用語）生成 PR 描述（預設）
-- `-p "自訂提示"`：簡短版設定客製化的 AI 提示
-- `-rp "自訂提示"`：簡短版完全替換預設提示
 - `--no-full-diff`：不包含完整的差異內容
 - `--debug`：啟用除錯模式，保存中間處理過程到文件
 
@@ -49,47 +47,41 @@
 
 ```bash
 # 基本用法：生成當前分支到 main 分支的 PR 描述
-./pr_desc_generator_v2.sh main
+./pr_desc_generator.sh main
 
 # 指定來源分支和目標分支
-./pr_desc_generator_v2.sh main feature/xyz
+./pr_desc_generator.sh main feature/xyz
 
 # 使用 OpenAI 模型優化描述
-./pr_desc_generator_v2.sh main --openai
-./pr_desc_generator_v2.sh main -o  # 簡短版
+./pr_desc_generator.sh main --openai
+./pr_desc_generator.sh main -o  # 簡短版
 
 # 使用 Gemini 模型優化描述
-./pr_desc_generator_v2.sh main --gemini
-./pr_desc_generator_v2.sh main -g  # 簡短版
+./pr_desc_generator.sh main --gemini
+./pr_desc_generator.sh main -g  # 簡短版
 
 # 使用英文生成描述
-./pr_desc_generator_v2.sh main --en
+./pr_desc_generator.sh main --en
 
 # 使用繁體中文生成描述
-./pr_desc_generator_v2.sh main --zh-tw
-
-# 添加自訂 AI 提示
-./pr_desc_generator_v2.sh main -p "請突出顯示性能改進"
-
-# 完全替換預設提示
-./pr_desc_generator_v2.sh main -rp "只保留標題和摘要"
+./pr_desc_generator.sh main --zh-tw
 
 # 不包含完整的程式碼差異內容
-./pr_desc_generator_v2.sh main --no-full-diff
+./pr_desc_generator.sh main --no-full-diff
 
 # 關閉自動複製到剪貼簿功能
-./pr_desc_generator_v2.sh main --no-copy
+./pr_desc_generator.sh main --no-copy
 
 # 啟用除錯模式
-./pr_desc_generator_v2.sh main --debug
+./pr_desc_generator.sh main --debug
 ```
 
 ## 配置與自訂
 
 腳本使用模組化設計，主要配置文件位於：
 
-- `pr_desc_generator/configs/ai_config.sh`：AI 模型配置文件
-- `pr_desc_generator/configs/pr_patterns.sh`：PR 描述模板配置文件
+- `ai_config.sh`：AI 模型配置文件
+- `pr_patterns.sh`：PR 描述模板配置文件
 
 ### AI API 密鑰配置
 
@@ -102,10 +94,6 @@ OPENAI_API_KEY="your-openai-api-key"
 GEMINI_API_KEY="your-gemini-api-key"
 ```
 
-### PR 模板自訂
-
-在 `pr_patterns.sh` 中可以自訂 PR 描述的風格和格式。
-
 ## 工作原理
 
 1. 解析命令行參數並設定相應的配置
@@ -117,14 +105,13 @@ GEMINI_API_KEY="your-gemini-api-key"
 
 ## 模組結構
 
-- `pr_desc_generator_v2.sh`：主入口腳本
-- `pr_desc_generator/main_wrapper.sh`：主腳本包裝器
-- `pr_desc_generator/main.sh`：主要流程控制
-- `pr_desc_generator/utils.sh`：通用工具函數
-- `pr_desc_generator/git_utils.sh`：Git 相關功能
-- `pr_desc_generator/ai_utils.sh`：AI API 調用功能
-- `pr_desc_generator/pr_generator.sh`：PR 描述生成邏輯
-- `pr_desc_generator/configs/`：配置文件目錄
+- `pr_desc_generator.sh`：主入口腳本
+- `src/main_wrapper.sh`：主腳本包裝器
+- `src/main.sh`：主要流程控制
+- `src/utils.sh`：通用工具函數
+- `src/git_utils.sh`：Git 相關功能
+- `src/ai_utils.sh`：AI API 調用功能
+- `src/pr_generator.sh`：PR 描述生成邏輯
 
 ## 故障排除
 
@@ -150,7 +137,8 @@ GEMINI_API_KEY="your-gemini-api-key"
 
 ## 作者
 
-- Reece
+Reece
+~~基本上都是 AI 寫的~~
 
 ## 授權
 
