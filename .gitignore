@@ -1,0 +1,10 @@
+# 常見的 Android 專案 .gitignore 內容
+*.iml
+.gradle
+/local.properties
+/.idea
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+.cxx
