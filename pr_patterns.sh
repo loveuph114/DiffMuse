@@ -4,7 +4,7 @@
 ZH_TW_PROMPT="你是一個專業的軟體工程師，擅長寫清晰簡潔的 PR 描述，請嚴格遵循以下格式和風格產生 PR 描述，保留其 Markdown 格式，並且不需要其他多餘回應。請使用繁體中文並採用台灣的用語與表達方式回覆，但保留程式相關專有名詞的英文原文，數字和程式碼也保持原樣。"
 
 # 英文提示模板
-EN_PROMPT="You’re a professional software engineer who excels at writing clear and concise PR descriptions. Strictly follow the given format and style to generate the PR description in Markdown, and do not include any additional responses. Please reply in English."
+EN_PROMPT="You're a professional software engineer who excels at writing clear and concise PR descriptions. Strictly follow the given format and style to generate the PR description in Markdown, and do not include any additional responses. Please reply in English."
 
 # PR 內容模板
 ZH_TW_PR_STYLE_TEMPLATE=$(cat << 'EOF'
@@ -20,6 +20,9 @@ ZH_TW_PR_STYLE_TEMPLATE=$(cat << 'EOF'
 * 每個變更項都使用粗體標明標題，後面接冒號和具體描述
 * 使用精確的程式碼和函數名稱，請詳細分析變更內容，使用具體的技術細節描述修改了哪些檔案、使用了哪些函數、做了哪些調整
 * 請只提及實際存在的程式碼和檔案，不要產生不存在的內容
+
+---
+版本：{VERSION}
 EOF
 )
 
@@ -39,6 +42,9 @@ EN_PR_STYLE_TEMPLATE=$(cat << 'EOF'
 * Start each change item with a **bolded title**, followed by a colon and a detailed explanation.
 * Use accurate code and function names. Analyze the changes thoroughly and describe which files were modified, which functions were used, and what specific adjustments were made using precise technical details.
 * Only include actual code and files—**do not** invent or reference content that does not exist.
+
+---
+Version: {VERSION}
 EOF
 )
  

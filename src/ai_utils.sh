@@ -18,6 +18,9 @@ function prepare_ai_request_data {
     local prompt_type=$2  # "diff" 或 "pr"
     local model_var="${model}_MODEL"
     
+    # 獲取版本號
+    local version="$VERSION"
+    
     # 根據選擇的語言設定添加語言提示和模板
     if [ "$LANGUAGE" = "en" ]; then
         LANG_PROMPT="$EN_PROMPT"
@@ -36,6 +39,9 @@ function prepare_ai_request_data {
             USER_PROMPT="請優化以下 PR 描述"
         fi
     fi
+    
+    # 替換模板中的版本號
+    STYLE_TEMPLATE="${STYLE_TEMPLATE/\{VERSION\}/$version}"
     
     # 使用預設提示
     if [ "$prompt_type" = "diff" ]; then

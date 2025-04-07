@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# 版本號碼
+VERSION="0.1.0"
+
 # 預設 AI 設定
 DEFAULT_AI_MODEL="claude" 
 DEFAULT_LANGUAGE="zh_TW" # en or zh_TW
