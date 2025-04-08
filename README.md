@@ -117,16 +117,6 @@ cd ~/Downloads
 ./path/to/diffmuse.sh main feature/xyz
 ```
 
-### 測試 Gemini API
-
-使用提供的測試腳本確認 Gemini API 連接是否正常：
-
-```bash
-./test_gemini.sh
-```
-
-如果成功，將顯示 "✅ Gemini API 測試成功！"
-
 ## 工作原理
 
 1. 解析命令行參數並設定相應的配置
