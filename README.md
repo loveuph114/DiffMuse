@@ -66,9 +66,6 @@
 # 使用繁體中文生成描述
 ./diffmuse.sh main --zh-tw
 
-# 不包含完整的程式碼差異內容
-./diffmuse.sh main --no-full-diff
-
 # 關閉自動複製到剪貼簿功能
 ./diffmuse.sh main --no-copy
 
