@@ -9,6 +9,7 @@
 - 支援繁體中文（臺灣用語）和英文兩種語言
 - AI 分析 Git 提交歷史和程式碼差異
 - 自動複製結果到剪貼簿，提高工作效率
+- 可從任何位置執行並處理任何 Git 專案
 - 可選的除錯模式，記錄中間過程
 - 模組化結構設計，便於維護與擴展
 
@@ -85,14 +86,46 @@
 
 ### AI API 密鑰配置
 
-在 `ai_config.sh` 中配置各 AI 服務的 API 密鑰：
+在 `ai_config.sh` 中配置各 AI 服務的 API 密鑰和專案路徑：
 
 ```bash
+# 專案路徑配置 (必填項目)
+# 指定 git 專案的絕對路徑
+PROJECT_PATH="/Users/username/projects/my-android-app"
+
 # 各 AI 服務的 API 金鑰
 CLAUDE_API_KEY="your-claude-api-key"
 OPENAI_API_KEY="your-openai-api-key"
 GEMINI_API_KEY="your-gemini-api-key"
 ```
+
+### 專案路徑設定
+
+從 v0.2.0 版本開始，腳本支援在任何位置執行，並處理不同專案的 Git 儲存庫：
+
+1. 在 `ai_config.sh` 中設定 `PROJECT_PATH` 變數，指向要處理的 Git 專案目錄
+2. 腳本會自動切換到該目錄執行所有 Git 操作
+3. 必須使用絕對路徑，且該路徑必須為有效的 Git 倉庫
+
+例如：
+```bash
+# 在 ai_config.sh 中設定
+PROJECT_PATH="/Users/username/AndroidStudioProjects/MyApp"
+
+# 然後從任何地方執行腳本
+cd ~/Downloads
+./path/to/pr_desc_generator.sh main feature/xyz
+```
+
+### 測試 Gemini API
+
+使用提供的測試腳本確認 Gemini API 連接是否正常：
+
+```bash
+./test_gemini.sh
+```
+
+如果成功，將顯示 "✅ Gemini API 測試成功！"
 
 ## 工作原理
 
@@ -117,21 +150,27 @@ GEMINI_API_KEY="your-gemini-api-key"
 
 ### 常見問題
 
-1. **無法調用 AI API**
+1. **專案路徑錯誤**
+   - 確認 `PROJECT_PATH` 已正確設定為絕對路徑
+   - 確認該路徑是有效的 Git 倉庫（包含 .git 目錄）
+   - 確認目前使用者有權限存取該路徑
+
+2. **無法調用 AI API**
    - 請確認已正確設定 API 密鑰
    - 確認網絡連接正常
+   - 使用 `./test_gemini.sh` 測試 Gemini API 連接
    - 檢查 curl 命令是否可用
 
-2. **無法複製到剪貼簿**
+3. **無法複製到剪貼簿**
    - 確認系統已安裝 pbcopy（macOS）或 xclip（Linux）命令
    - 使用 `--no-copy` 選項跳過複製功能
 
-3. **找不到分支間差異**
+4. **找不到分支間差異**
    - 確認分支名稱輸入正確
    - 確認兩個分支之間確實存在程式碼差異
    - 使用 `--debug` 選項查看詳細日誌
 
-4. **JSON 解析錯誤**
+5. **JSON 解析錯誤**
    - 建議安裝 jq 命令以提高 JSON 處理的穩定性
    - 使用 `--debug` 選項查看原始 API 請求和回應
 

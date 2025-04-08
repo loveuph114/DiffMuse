@@ -1,5 +1,51 @@
 #!/bin/bash
 
+# 處理專案路徑
+function handle_project_path() {
+  # 儲存當前工作目錄
+  ORIGINAL_DIR=$(pwd)
+  
+  # 檢查 PROJECT_PATH 是否有設定
+  if [ -z "$PROJECT_PATH" ]; then
+    echo "錯誤：未設定專案路徑。請在 ai_config.sh 中設定 PROJECT_PATH 變數。"
+    echo "例如: PROJECT_PATH=\"/Users/username/projects/my-android-app\""
+    exit 1
+  fi
+  
+  # 轉換為絕對路徑
+  if [[ "$PROJECT_PATH" != /* ]]; then
+    # 如果是相對路徑，轉換為絕對路徑
+    PROJECT_DIR=$(realpath "$PROJECT_PATH" 2>/dev/null)
+    if [ $? -ne 0 ]; then
+      echo "錯誤：無法解析專案路徑 '$PROJECT_PATH'，請使用絕對路徑"
+      exit 1
+    fi
+  else
+    PROJECT_DIR="$PROJECT_PATH"
+  fi
+  
+  # 驗證路徑是否存在
+  if [ ! -d "$PROJECT_DIR" ]; then
+    echo "錯誤：專案路徑 '$PROJECT_DIR' 不存在或不是有效目錄"
+    exit 1
+  fi
+  
+  # 驗證路徑是否為 git 倉庫
+  if [ ! -d "$PROJECT_DIR/.git" ]; then
+    echo "錯誤：專案路徑 '$PROJECT_DIR' 不是有效的 git 倉庫"
+    exit 1
+  fi
+  
+  # 切換到專案目錄
+  cd "$PROJECT_DIR"
+  echo "已切換到專案目錄: $PROJECT_DIR"
+}
+
+# 切換回原始目錄
+function restore_original_dir() {
+  cd "$ORIGINAL_DIR"
+}
+
 # 顯示使用說明
 function show_usage {
     echo "參數:"

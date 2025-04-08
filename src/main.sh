@@ -15,6 +15,9 @@ source "$SCRIPT_DIR/pr_generator.sh"
 source "$PARENT_DIR/ai_config.sh"
 source "$PARENT_DIR/pr_patterns.sh"
 
+# 先切換到專案目錄
+handle_project_path
+
 # 獲取當前分支
 CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
 
@@ -109,11 +112,13 @@ fi
 # 檢查分支是否存在
 if ! git rev-parse --verify "$TARGET_BRANCH" &>/dev/null; then
     echo "錯誤：目標分支 '$TARGET_BRANCH' 不存在或不可訪問。"
+    restore_original_dir
     exit 1
 fi
 
 if ! git rev-parse --verify "$SOURCE_BRANCH" &>/dev/null; then
     echo "錯誤：來源分支 '$SOURCE_BRANCH' 不存在或不可訪問。"
+    restore_original_dir
     exit 1
 fi
 
@@ -157,6 +162,9 @@ function main {
     
     # 清理臨時文件
     rm -f "$TEMP_FILE"
+    
+    # 切換回原始目錄
+    restore_original_dir
 }
 
 # 執行主要流程
