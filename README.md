@@ -81,8 +81,8 @@
 
 腳本使用模組化設計，主要配置文件位於：
 
-- `ai_configs.sh`：AI 模型配置文件
-- `pr_prompts.sh`：PR 描述模板配置文件
+- `src/ai_configs.sh`：AI 模型配置文件
+- `src/pr_prompts.sh`：PR 描述模板配置文件
 
 ### AI API 密鑰配置
 
