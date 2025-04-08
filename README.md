@@ -81,12 +81,12 @@
 
 腳本使用模組化設計，主要配置文件位於：
 
-- `ai_config.sh`：AI 模型配置文件
-- `pr_patterns.sh`：PR 描述模板配置文件
+- `ai_configs.sh`：AI 模型配置文件
+- `pr_prompts.sh`：PR 描述模板配置文件
 
 ### AI API 密鑰配置
 
-在 `ai_config.sh` 中配置各 AI 服務的 API 密鑰和專案路徑：
+在 `ai_configs.sh` 中配置各 AI 服務的 API 密鑰和專案路徑：
 
 ```bash
 # 專案路徑配置 (必填項目)
