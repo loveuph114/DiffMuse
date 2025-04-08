@@ -7,7 +7,7 @@ function check_api_key {
     
     if [ -z "${!key_var}" ]; then
         echo "錯誤：使用 ${model} 功能需要提供 ${model} API 密鑰"
-        echo "請在 ai_config.sh 中設定 ${key_var} 變數"
+        echo "請在 ai_configs.sh 中設定 ${key_var} 變數"
         exit 1
     fi
 }

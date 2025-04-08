@@ -12,8 +12,8 @@ source "$SCRIPT_DIR/utils.sh"
 source "$SCRIPT_DIR/git_utils.sh"
 source "$SCRIPT_DIR/ai_utils.sh"
 source "$SCRIPT_DIR/pr_generator.sh"
-source "$PARENT_DIR/ai_config.sh"
-source "$PARENT_DIR/pr_patterns.sh"
+source "$SCRIPT_DIR/ai_configs.sh"
+source "$SCRIPT_DIR/ai_prompts.sh"
 
 # 先切換到專案目錄
 handle_project_path

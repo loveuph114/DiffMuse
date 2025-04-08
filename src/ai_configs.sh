@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# 版本號碼
+# DiffMuse - 版本號碼
 VERSION="0.2.0"
 
 # 專案路徑配置 (必填項目)
@@ -20,4 +20,4 @@ GEMINI_API_KEY=""
 # 各 AI 服務使用的模型設定
 CLAUDE_MODEL="claude-3-5-sonnet-20241022"
 OPENAI_MODEL="gpt-3.5-turbo-0125"
-GEMINI_MODEL="gemini-2.0-flash"
+GEMINI_MODEL="gemini-2.0-flash" 

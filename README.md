@@ -1,4 +1,4 @@
-# PR 描述產生器 (pr_desc_generator.sh)
+# DiffMuse (diffmuse.sh)
 
 這是一款高效的 Pull Request 描述自動生成工具，使用 Git 差異分析和先進的 AI 技術，幫助開發者快速產生結構清晰、內容完整的 PR 描述。
 
@@ -25,7 +25,7 @@
 
 基本用法：
 ```bash
-./pr_desc_generator.sh 目標分支 [來源分支] [選項]
+./diffmuse.sh 目標分支 [來源分支] [選項]
 ```
 
 ### 必要參數
@@ -48,33 +48,33 @@
 
 ```bash
 # 基本用法：生成當前分支到 main 分支的 PR 描述
-./pr_desc_generator.sh main
+./diffmuse.sh main
 
 # 指定來源分支和目標分支
-./pr_desc_generator.sh main feature/xyz
+./diffmuse.sh main feature/xyz
 
 # 使用 OpenAI 模型優化描述
-./pr_desc_generator.sh main --openai
-./pr_desc_generator.sh main -o  # 簡短版
+./diffmuse.sh main --openai
+./diffmuse.sh main -o  # 簡短版
 
 # 使用 Gemini 模型優化描述
-./pr_desc_generator.sh main --gemini
-./pr_desc_generator.sh main -g  # 簡短版
+./diffmuse.sh main --gemini
+./diffmuse.sh main -g  # 簡短版
 
 # 使用英文生成描述
-./pr_desc_generator.sh main --en
+./diffmuse.sh main --en
 
 # 使用繁體中文生成描述
-./pr_desc_generator.sh main --zh-tw
+./diffmuse.sh main --zh-tw
 
 # 不包含完整的程式碼差異內容
-./pr_desc_generator.sh main --no-full-diff
+./diffmuse.sh main --no-full-diff
 
 # 關閉自動複製到剪貼簿功能
-./pr_desc_generator.sh main --no-copy
+./diffmuse.sh main --no-copy
 
 # 啟用除錯模式
-./pr_desc_generator.sh main --debug
+./diffmuse.sh main --debug
 ```
 
 ## 配置與自訂
@@ -114,7 +114,7 @@ PROJECT_PATH="/Users/username/AndroidStudioProjects/MyApp"
 
 # 然後從任何地方執行腳本
 cd ~/Downloads
-./path/to/pr_desc_generator.sh main feature/xyz
+./path/to/diffmuse.sh main feature/xyz
 ```
 
 ### 測試 Gemini API
@@ -138,7 +138,7 @@ cd ~/Downloads
 
 ## 模組結構
 
-- `pr_desc_generator.sh`：主入口腳本
+- `diffmuse.sh`：主入口腳本
 - `src/main_wrapper.sh`：主腳本包裝器
 - `src/main.sh`：主要流程控制
 - `src/utils.sh`：通用工具函數

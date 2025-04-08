@@ -46,5 +46,4 @@ EN_PR_STYLE_TEMPLATE=$(cat << 'EOF'
 ---
 Version: {VERSION}
 EOF
-)
- 
+) 

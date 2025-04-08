@@ -7,7 +7,7 @@ function handle_project_path() {
   
   # 檢查 PROJECT_PATH 是否有設定
   if [ -z "$PROJECT_PATH" ]; then
-    echo "錯誤：未設定專案路徑。請在 ai_config.sh 中設定 PROJECT_PATH 變數。"
+    echo "錯誤：未設定專案路徑。請在 ai_configs.sh 中設定 PROJECT_PATH 變數。"
     echo "例如: PROJECT_PATH=\"/Users/username/projects/my-android-app\""
     exit 1
   fi
@@ -60,7 +60,7 @@ function show_usage {
     echo "  -p              簡短版設定客製化的 AI 提示"
     echo "  -rp             簡短版完全替換預設提示"
     echo "  --no-full-diff  不包含完整的差異內容（預設包含完整差異內容）"
-    echo "  --debug         將 diff 資訊存成文件方便除錯（存放在 pr_desc_generator_debug 目錄）"
+    echo "  --debug         將 diff 資訊存成文件方便除錯（存放在 diffmuse_debug 目錄）"
     echo "範例:"
     echo "  $0 main                      # main <- $CURRENT_BRANCH"
     echo "  $0 develop                   # develop <- $CURRENT_BRANCH"
@@ -82,12 +82,12 @@ function show_usage {
 function setup_debug_files {
     if [ "$DEBUG_MODE" = true ]; then
         # 創建 debug 目錄（如果不存在）
-        DEBUG_DIR="$PARENT_DIR/gen_pr_desc_debug"
+        DEBUG_DIR="$PARENT_DIR/diffmuse_debug"
         mkdir -p "$DEBUG_DIR"
 
         # 生成當前時間戳，用於檔名
         TIMESTAMP=$(date "+%Y%m%d_%H%M%S")
-        DEBUG_FILE_PREFIX="$DEBUG_DIR/pr_diff_${SOURCE_BRANCH//\//_}_to_${TARGET_BRANCH//\//_}_$TIMESTAMP"
+        DEBUG_FILE_PREFIX="$DEBUG_DIR/diff_${SOURCE_BRANCH//\//_}_to_${TARGET_BRANCH//\//_}_$TIMESTAMP"
 
         # 存儲 commit 資訊
         echo "分支 $SOURCE_BRANCH 到 $TARGET_BRANCH 的提交：" > "${DEBUG_FILE_PREFIX}_commits.txt"
